@@ -487,3 +487,18 @@ D:\C# Template\shellby\bin\Debug\Bunifu.UI.WinForms.BunifuToolTip.xml
 D:\C# Template\shellby\bin\Debug\Bunifu.UI.WinForms.BunifuTransition.xml
 D:\C# Template\shellby\bin\Debug\Bunifu.UI.WinForms.BunifuUserControl.xml
 D:\C# Template\shellby\obj\Debug\shellby.csproj.CopyComplete
+C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\Debug\shellby.exe.config
+C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\Debug\shellby.exe
+C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\Debug\shellby.pdb
+C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\shellby\obj\Debug\shellby.csproj.AssemblyReference.cache
+C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\shellby\obj\Debug\shellby.csproj.SuggestedBindingRedirects.cache
+C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\shellby\obj\Debug\shellby.Form1.resources
+C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\shellby\obj\Debug\shellby.Form2.resources
+C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\shellby\obj\Debug\shellby.Form3.resources
+C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\shellby\obj\Debug\shellby.Properties.Resources.resources
+C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\shellby\obj\Debug\shellby.csproj.GenerateResource.cache
+C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\shellby\obj\Debug\shellby.exe.licenses
+C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\shellby\obj\Debug\shellby.csproj.CoreCompileInputs.cache
+C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\shellby\obj\Debug\shellby.csproj.CopyComplete
+C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\shellby\obj\Debug\shellby.exe
+C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\shellby\obj\Debug\shellby.pdb

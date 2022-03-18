@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Data.OleDb;
 
 namespace shellby
 {
@@ -25,11 +26,31 @@ namespace shellby
             Application.Exit();
         }
 
+        // db connection
+        public OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=datam.accdb");
+        OleDbCommand cmd;
+        OleDbDataReader dr;
         private void bunifuIconButton1_Click(object sender, EventArgs e)
         {
-            Form3 f3 = new Form3();
-            f3.ShowDialog();
-            this.Hide();
+            string ad = bunifuTextBox1.Text;
+            string parola = bunifuTextBox2.Text;
+            cmd = new OleDbCommand();
+            con.Open();
+            cmd.Connection = con;
+            cmd.CommandText = "SELECT * FROM Login where kullanici='" + ad + "' AND sifre='" + parola + "'";
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                Form3 f3 = new Form3();
+                f3.ShowDialog();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Kullanıcı adı ya da şifre yanlış");
+            }
+
+            con.Close();
         }
 
         private void Form1_Load(object sender, EventArgs e)
