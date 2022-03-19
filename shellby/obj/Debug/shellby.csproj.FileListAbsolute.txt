@@ -502,3 +502,7 @@ C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\shellby\obj\Debug\shellby.cspr
 C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\shellby\obj\Debug\shellby.csproj.CopyComplete
 C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\shellby\obj\Debug\shellby.exe
 C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\shellby\obj\Debug\shellby.pdb
+C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\newdebug\shellby.exe.config
+C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\newdebug\shellby.exe
+C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\newdebug\shellby.pdb
+C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\newdebug\asd.accdb
