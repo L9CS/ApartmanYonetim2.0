@@ -34,14 +34,14 @@
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.bunifuIconButton2 = new Bunifu.UI.WinForms.BunifuButton.BunifuIconButton();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.bunifuLabel5 = new Bunifu.UI.WinForms.BunifuLabel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // bunifuElipse1
@@ -82,7 +82,7 @@
             this.bunifuIconButton2.CustomizableEdges = borderEdges1;
             this.bunifuIconButton2.DialogResult = System.Windows.Forms.DialogResult.None;
             this.bunifuIconButton2.ForeColor = System.Drawing.Color.DarkGray;
-            this.bunifuIconButton2.Image = ((System.Drawing.Image)(resources.GetObject("bunifuIconButton2.Image")));
+            this.bunifuIconButton2.Image = null;
             this.bunifuIconButton2.ImageMargin = new System.Windows.Forms.Padding(0);
             this.bunifuIconButton2.Location = new System.Drawing.Point(444, 14);
             this.bunifuIconButton2.Name = "bunifuIconButton2";
@@ -93,16 +93,6 @@
             this.bunifuIconButton2.TabIndex = 21;
             this.bunifuIconButton2.Click += new System.EventHandler(this.bunifuIconButton2_Click);
             // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(12, 33);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(106, 61);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 13;
-            this.pictureBox3.TabStop = false;
-            // 
             // bunifuLabel5
             // 
             this.bunifuLabel5.AllowParentOverrides = false;
@@ -110,12 +100,12 @@
             this.bunifuLabel5.CursorType = null;
             this.bunifuLabel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bunifuLabel5.ForeColor = System.Drawing.Color.SeaGreen;
-            this.bunifuLabel5.Location = new System.Drawing.Point(124, 33);
+            this.bunifuLabel5.Location = new System.Drawing.Point(154, 83);
             this.bunifuLabel5.Name = "bunifuLabel5";
             this.bunifuLabel5.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.bunifuLabel5.Size = new System.Drawing.Size(186, 20);
+            this.bunifuLabel5.Size = new System.Drawing.Size(210, 20);
             this.bunifuLabel5.TabIndex = 14;
-            this.bunifuLabel5.Text = "New uptade downloading..";
+            this.bunifuLabel5.Text = "Güncellemeler kontrol ediliyor.";
             this.bunifuLabel5.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.bunifuLabel5.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
             // 
@@ -145,15 +135,25 @@
             this.timer1.Interval = 15;
             this.timer1.Tick += new System.EventHandler(this.Form3_Load);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(80, 61);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(68, 63);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
             this.ClientSize = new System.Drawing.Size(484, 212);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.bunifuLabel5);
-            this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form3";
@@ -163,8 +163,8 @@
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form3_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form3_MouseMove);
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -175,10 +175,10 @@
         private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
         private System.Windows.Forms.Panel panel1;
         private Bunifu.UI.WinForms.BunifuButton.BunifuIconButton bunifuIconButton2;
-        private System.Windows.Forms.PictureBox pictureBox3;
         private Bunifu.UI.WinForms.BunifuLabel bunifuLabel5;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
