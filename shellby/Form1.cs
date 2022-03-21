@@ -45,8 +45,8 @@ namespace shellby
             dr = cmd.ExecuteReader();
             if (dr.Read())
             {
-                Form3 f3 = new Form3();
-                f3.ShowDialog();
+                Form4 f4 = new Form4();
+                f4.ShowDialog();
                 this.Hide();
             }
             else

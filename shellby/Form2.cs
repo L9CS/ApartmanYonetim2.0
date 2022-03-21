@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.OleDb;
+using System.IO;
 
 
 namespace shellby
@@ -21,31 +20,13 @@ namespace shellby
         {
             InitializeComponent();
         }
+        public OleDbConnection bag = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=datam.accdb");
+        public DataTable tablo = new DataTable();
+        public OleDbDataAdapter adtr = new OleDbDataAdapter();
+        public OleDbCommand kmt = new OleDbCommand();
+        string DosyaYolu, DosyaAdi = "";
+        int id;
 
-        private string localRiotGames = Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
-        string riotGames = "Riot Games";
-        private string data;
-        static readonly string ProgramData = @"C:\ProgramData\Riot Games";
-        string temp = Environment.GetEnvironmentVariable("TEMP");
-        private string dirName;
-        private string dirPath;
-        private bool truePath;
-
-
-
-        private void Form2_Shown (object sender, EventArgs e)
-        {
-
-        }
-        private void bunifuButton1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -54,7 +35,22 @@ namespace shellby
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            OleDbCommand cmd = new OleDbCommand();
+            bag.Open();
+            cmd.Connection = bag;
+            cmd.CommandText = "SELECT * FROM hareket";
+            OleDbDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                listBox1.Items.Add(dr["hareket"].ToString() + dr["tarih"].ToString() + dr["kullanici".ToString()]);
+
+
+            }
+            bag.Close();
+
             timer1.Start();
+            listele();
 
         }
 
@@ -116,45 +112,21 @@ namespace shellby
 
         }
 
-        private void bunifuButton2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void bunifuButton7_Click(object sender, EventArgs e)
         {
-            bunifuPages1.SetPage("Injector");
+            bunifuPages1.SetPage("tabPage1");
         }
 
         private void bunifuButton4_Click(object sender, EventArgs e)
         {
-            bunifuPages1.SetPage("Plugins");
+            bunifuPages1.SetPage("tabPage2");
         }
 
         private void bunifuButton3_Click(object sender, EventArgs e)
         {
-            bunifuPages1.SetPage("Changelogs");
+            bunifuPages1.SetPage("tabPage3");
         }
 
-        private void bunifuButton5_Click(object sender, EventArgs e)
-        {
-            bunifuPages1.SetPage("Overview");
-        }
-
-        private void bunifuButton6_Click(object sender, EventArgs e)
-        {
-            bunifuPages1.SetPage("Settings");
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -166,306 +138,278 @@ namespace shellby
 
         }
 
-        private void bunifuButton9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bunifuIconButton5_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://eclipse.lol/");
-        }
-
-        private void bunifuIconButton4_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://t.me/Riot_Eclipse");
-        }
 
         private void bunifuButton8_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void bunifuButton10_Click(object sender, EventArgs e)
+        private void bunifuButton5_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void panel6_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void bunifuLabel30_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://t.me/Riot_Eclipse");
-        }
-
-        private void bunifuLabel32_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://eclipse.lol/");
-        }
-
-        private void bunifuButton10_Click_1(object sender, EventArgs e)
-        {
-            FolderBrowserDialog x = new FolderBrowserDialog();
-            x.ShowDialog();
-            dirPath = x.SelectedPath;
-
-            if (x.SelectedPath.Contains("Riot Games\\League of Legends") ||
-                x.SelectedPath.Contains("Riot Games\\lol") || x.SelectedPath.Contains("League of Legends") ||
-                x.SelectedPath.Contains("lol"))
+            try
             {
-                MessageBox.Show("True directory", "Success");
-                truePath = true;
+                if (textBox1.Text.Trim() == "") errorProvider1.SetError(textBox1, "Boş geçilmez");
+                else errorProvider1.SetError(textBox1, "");
+                if (textBox2.Text.Trim() == "") errorProvider1.SetError(textBox2, "Boş geçilmez");
+                else errorProvider1.SetError(textBox2, "");
+                if (textBox3.Text.Trim() == "") errorProvider1.SetError(textBox3, "Boş geçilmez");
+                else errorProvider1.SetError(textBox3, "");
+                if (textBox4.Text.Trim() == "") errorProvider1.SetError(textBox4, "Boş geçilmez");
+                else errorProvider1.SetError(textBox4, "");
+                if (textBox5.Text.Trim() == "") errorProvider1.SetError(textBox5, "Boş geçilmez");
+                else errorProvider1.SetError(textBox5, "");
+
+                if (textBox1.Text.Trim() != "" && textBox2.Text.Trim() != "" && textBox3.Text.Trim() != "" && textBox4.Text.Trim() != "" && textBox5.Text.Trim() != "")
+                {
+                    bag.Open();
+                    kmt.Connection = bag;
+                    kmt.CommandText = "INSERT INTO stokbil(stokAdi,stokModeli,stokSeriNo,stokAdedi,stokTarih,kayitYapan,dosyaAdi) VALUES ('" + textBox1.Text + "','" + textBox2.Text + "','" + textBox3.Text + "','" + textBox4.Text + "','" + dateTimePicker1.Text + "','" + textBox5.Text + "','" + DosyaAdi + "') ";
+                    kmt.ExecuteNonQuery();
+                    kmt.Dispose();
+                    bag.Close();
+                    for (int i = 0; i < this.Controls.Count; i++)
+                    {
+                        if (this.Controls[i] is TextBox) this.Controls[i].Text = "";
+                    }
+                    listele();
+                    if (DosyaAdi != "") File.WriteAllBytes(DosyaAdi, File.ReadAllBytes(DosyaAc.FileName));
+                    MessageBox.Show("Kayıt İşlemi Tamamlandı ! ", "İşlem Sonucu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+            }
+            catch
+            {
+                MessageBox.Show("Kayıtlı Seri No !");
+                bag.Close();
+            }
+            bag.Open();
+            kmt.Connection = bag;
+            kmt.CommandText = "INSERT INTO hareket(hareket,tarih,kullanici)  VALUES ('" + "Ekleme İşlemi Yapılmıştır..." + "','" + DateTime.Now.ToLongDateString() + "','" + textBox5.Text + "') ";
+
+            kmt.ExecuteNonQuery();
+
+            bag.Close();
+        }
+
+        private void bunifuButton6_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult cevap;
+                cevap = MessageBox.Show("Kaydı silmek istediğinizden eminmisiniz", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (cevap == DialogResult.Yes && dataGridView1.CurrentRow.Cells[0].Value.ToString().Trim() != "")
+                {
+                    bag.Open();
+                    kmt.Connection = bag;
+                    kmt.CommandText = "DELETE from stokbil WHERE stokSeriNo='" + dataGridView1.CurrentRow.Cells[2].Value.ToString() + "' ";
+                    kmt.ExecuteNonQuery();
+                    kmt.Dispose();
+                    bag.Close();
+                    listele();
+                }
+            }
+            catch
+            {
+                ;
             }
 
+            bag.Open();
+            kmt.Connection = bag;
+            kmt.CommandText = "INSERT INTO hareket(hareket,tarih,kullanici) VALUES ('" + "Silme İşlemi Yapılmıştır..." + "','" + DateTime.Now.ToLongDateString() + "','" + textBox5.Text + "') ";
+            kmt.ExecuteNonQuery();
+
+            bag.Close();
+        }
+
+        private void bunifuButton9_Click(object sender, EventArgs e)
+        {
+            bag.Open();
+            kmt.Connection = bag;
+            kmt.CommandText = "INSERT INTO hareket(hareket,tarih,kullanici) VALUES ('" + "Güncelleme İşlemi Yapılmıştır..." + "','" + DateTime.Now.ToLongDateString() + "','" + textBox5.Text + "') ";
+            kmt.ExecuteNonQuery();
+
+
+            bag.Close();
+        }
+
+        private void btnResimEkle_Click(object sender, EventArgs e)
+        {
+            if (DosyaAc.ShowDialog() == DialogResult.OK)
+            {
+                foreach (string i in DosyaAc.FileName.Split('\\'))
+                {
+                    if (i.Contains(".jpg")) { DosyaAdi = i; }
+                    else if (i.Contains(".png")) { DosyaAdi = i; }
+                    else { DosyaYolu += i + "\\"; }
+                }
+                pictureBox1.ImageLocation = DosyaAc.FileName;
+            }
             else
             {
-                MessageBox.Show("Wrong directory!", "Error");
-                truePath = false;
+                MessageBox.Show("Dosya Girmediniz!");
             }
         }
 
-        private void bunifuButton11_Click(object sender, EventArgs e)
+        private void btnResimSil_Click(object sender, EventArgs e)
         {
-            // if league of legends path true
-            if (truePath == true)
+            pictureBox1.ImageLocation = "";
+            DosyaAdi = "";
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            textBox1.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            textBox2.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+            textBox3.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+            textBox4.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
+            textBox5.Text = dataGridView1.CurrentRow.Cells[5].Value.ToString();
+            dateTimePicker1.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+            try
             {
-                //close lol game
-                string lolGame = "League of Legends";
-                Process[] processX = Process.GetProcessesByName(lolGame);
-
-                foreach (Process prs in processX)
+                kmt = new OleDbCommand("select * from stokbil where stokSeriNo='" + dataGridView1.CurrentRow.Cells[2].Value.ToString() + "'", bag);
+                bag.Open();
+                OleDbDataReader oku = kmt.ExecuteReader();
+                oku.Read();
+                if (oku.HasRows)
                 {
-                    if (prs.ProcessName == lolGame)
-                    {
-                        prs.Kill();
-                        break;
-                    }
+                    pictureBox1.ImageLocation = oku[7].ToString();
+                    id = Convert.ToInt32(oku[0].ToString());
                 }
-
-                //close lol client
-                string lol = "LeagueClient";
-                Process[] process = Process.GetProcessesByName(lol);
-
-                foreach (Process prs in process)
-                {
-                    if (prs.ProcessName == lol)
-                    {
-                        prs.Kill();
-                        break;
-                    }
-                }
-                // close lol login screen
-                string riotClient = "RiotClientServices";
-                Process[] riot = Process.GetProcessesByName(riotClient);
-
-                foreach (Process prs in riot)
-                {
-                    if (prs.ProcessName == riotClient)
-                    {
-                        prs.Kill();
-                        break;
-                    }
-                }
-
-                Thread.Sleep(1000);
-                //delete temp folder
-                try
-                {
-                    if (Directory.Exists(temp))
-                    {
-                        Directory.Delete(temp, true);
-                        MessageBox.Show("Temp logs deleted!", "Success");
-                    }
-                    else if (!Directory.Exists(temp))
-                    {
-                        MessageBox.Show("Temp not found!", "Error");
-                    }
-                }
-                catch (Exception exception)
-                {
-
-
-                }
-
-                //delete program/data/riotgames machine.cfg 
-                try
-                {
-                    string machine = "machine.cfg";
-                    if (File.Exists(Path.Combine(ProgramData, machine)))
-                    {
-                        // If file found, delete it    
-                        File.Delete(Path.Combine(ProgramData, machine));
-                        MessageBox.Show("Machine.cfg deleted!");
-                    }
-
-                    else if (!File.Exists(Path.Combine(ProgramData, machine)))
-                    {
-                        MessageBox.Show("Machine.cfg not found!", "Success");
-
-                    }
-                }
-                catch (Exception exception)
-                {
-
-                }
-
-                //delete appdata/local/riotgames folder
-                data = Path.Combine(localRiotGames, riotGames);
-                try
-                {
-                    if (Directory.Exists(data))
-                    {
-                        Directory.Delete(data, true);
-                        MessageBox.Show("Appdata logs deleted!", "Success");
-                    }
-                    else if (!Directory.Exists(data))
-                    {
-                        MessageBox.Show("Appdata/RiotGames not found!", "Success");
-                    }
-                }
-                catch (Exception exception)
-                {
-
-                }
-
-                // delete lol config 
-                try
-                {
-                    string config = "Config";
-                    string configdir = Path.Combine(dirPath, config);
-                    if (Directory.Exists(configdir))
-                    {
-                        Directory.Delete(configdir, true);
-                        MessageBox.Show("Configs deleted!", "Success");
-                    }
-                    else if (!Directory.Exists(configdir))
-                    {
-                        MessageBox.Show("Configs not found!", "Success");
-                    }
-
-                }
-                catch (Exception exception)
-                {
-                    MessageBox.Show("For delete Config u need to close LoLClient.exe");
-
-                }
-
-
-                // delete lol logs
-                try
-                {
-                    string logs = "Logs";
-                    string logsdir = Path.Combine(dirPath, logs);
-                    if (Directory.Exists(logsdir))
-                    {
-                        Directory.Delete(logsdir, true);
-                        MessageBox.Show("Logs deleted!", "Success");
-                    }
-                    else if (!Directory.Exists(logsdir))
-                    {
-                        MessageBox.Show("Logs not found!", "Success");
-                    }
-
-                }
-                catch (Exception exception)
-                {
-                    MessageBox.Show("For delete logs u need to close LoLClient.exe");
-                    Application.Exit();
-                }
-
-                MessageBox.Show("All logs successfuly deleted! i hope you dont get ban xD");
-
+                bag.Close();
             }
-
-            // first need to select directory
-            if (truePath == false)
+            catch
             {
-                MessageBox.Show("Select a League of Legends directory!", "Error");
+                bag.Close();
             }
-
         }
 
-        private void bunifuLabel52_Click(object sender, EventArgs e)
+        public void listele()
+        {
+            tablo.Clear();
+            bag.Open();
+            OleDbDataAdapter adtr = new OleDbDataAdapter("select stokAdi,stokModeli,stokSeriNo,stokAdedi,stokTarih,kayitYapan From stokbil", bag);
+            adtr.Fill(tablo);
+            dataGridView1.DataSource = tablo;
+            dataGridView2.DataSource = tablo;
+            adtr.Dispose();
+            bag.Close();
+            try
+            {
+                dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                //datagridview1'deki tüm satırı seç              
+                dataGridView1.Columns[0].HeaderText = "STOK ADI";
+                //sütunlardaki textleri değiştirme
+                dataGridView1.Columns[1].HeaderText = "STOK MODELİ";
+                dataGridView1.Columns[2].HeaderText = "STOK SERİNO";
+                dataGridView1.Columns[3].HeaderText = "STOK ADEDİ";
+                dataGridView1.Columns[4].HeaderText = "STOK TARİH";
+                dataGridView1.Columns[5].HeaderText = "KAYIT YAPAN";
+                dataGridView1.Columns[0].Width = 120;
+                //genişlik
+                dataGridView1.Columns[1].Width = 120;
+                dataGridView1.Columns[2].Width = 120;
+                dataGridView1.Columns[3].Width = 80;
+                dataGridView1.Columns[4].Width = 100;
+                dataGridView1.Columns[5].Width = 120;
+                // 2 
+                dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                //datagridview1'deki tüm satırı seç              
+                dataGridView2.Columns[0].HeaderText = "STOK ADI";
+                //sütunlardaki textleri değiştirme
+                dataGridView2.Columns[1].HeaderText = "STOK MODELİ";
+                dataGridView2.Columns[2].HeaderText = "STOK SERİNO";
+                dataGridView2.Columns[3].HeaderText = "STOK ADEDİ";
+                dataGridView2.Columns[4].HeaderText = "STOK TARİH";
+                dataGridView2.Columns[5].HeaderText = "KAYIT YAPAN";
+                dataGridView2.Columns[0].Width = 120;
+                //genişlik
+                dataGridView2.Columns[1].Width = 120;
+                dataGridView2.Columns[2].Width = 120;
+                dataGridView2.Columns[3].Width = 80;
+                dataGridView2.Columns[4].Width = 100;
+                dataGridView2.Columns[5].Width = 120;
+            }
+            catch
+            {
+                ;
+            }
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void tabPage5_Click(object sender, EventArgs e)
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
 
-        private void bunifuIconButton8_Click(object sender, EventArgs e)
+        private void btnStokModelAra_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://t.me/Riot_Eclipse");
+            OleDbDataAdapter adtr = new OleDbDataAdapter("select * From stokbil", bag);
+            if (radioButton1.Checked == true)
+            {
+                if (textBox6.Text.Trim() == "")
+                {
+                    tablo.Clear();
+                    kmt.Connection = bag;
+                    kmt.CommandText = "Select * from stokbil";
+                    adtr.SelectCommand = kmt;
+                    adtr.Fill(tablo);
+                }
+                if (Convert.ToBoolean(bag.State) == false)
+                {
+                    bag.Open();
+                }
+                if (textBox6.Text.Trim() != "")
+                {
+                    adtr.SelectCommand.CommandText = " Select * From stokbil" +
+                         " where(stokAdi='" + textBox6.Text + "' )";
+                    tablo.Clear();
+                    adtr.Fill(tablo);
+                    bag.Close();
+                }
+
+
+            }
+            else if (radioButton2.Checked == true)
+            {
+                if (textBox6.Text.Trim() == "")
+                {
+                    tablo.Clear();
+                    kmt.Connection = bag;
+                    kmt.CommandText = "Select * from stokbil";
+                    adtr.SelectCommand = kmt;
+                    adtr.Fill(tablo);
+                }
+                if (Convert.ToBoolean(bag.State) == false)
+                {
+                    bag.Open();
+                }
+                if (textBox6.Text.Trim() != "")
+                {
+                    adtr.SelectCommand.CommandText = " Select * From stokbil" +
+                         " where(stokModeli='" + textBox6.Text + "' )";
+                    tablo.Clear();
+                    adtr.Fill(tablo);
+                    bag.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Lütfen bir arama türü seçiniz...");
+            }
         }
 
-        private void bunifuIconButton9_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://eclipse.lol/");
-        }
-
-        private void bunifuLabel57_Click(object sender, EventArgs e)
+        private void tabPage3_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void bunifuLabel59_Click(object sender, EventArgs e)
+        private void tabPage1_Click_1(object sender, EventArgs e)
         {
 
-        }
-
-        private void bunifuLabel60_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox101_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bunifuShadowPanel1_ControlAdded(object sender, ControlEventArgs e)
-        {
-
-        }
-
-        private void bunifuLabel63_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bunifuLabel65_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bunifuLabel69_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bunifuIconButton12_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://t.me/Riot_Eclipse");
-        }
-
-        private void bunifuIconButton13_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://eclipse.lol/");
-        }
-
-        private void bunifuIconButton10_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://t.me/Riot_Eclipse");
-        }
-
-        private void bunifuIconButton11_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://eclipse.lol/");
         }
     }
 }

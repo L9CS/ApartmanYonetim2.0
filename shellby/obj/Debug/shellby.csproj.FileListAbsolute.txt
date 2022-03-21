@@ -805,3 +805,4 @@ C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\shellby\obj\Debug\shellby.cspr
 C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\shellby\obj\Debug\shellby.exe
 C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\shellby\obj\Debug\shellby.pdb
 C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\shellby\obj\Debug\shellby.Form3.resources
+C:\Users\wcat\Documents\GitHub\ApartmanYonetim2.0\shellby\obj\Debug\shellby.Form4.resources
