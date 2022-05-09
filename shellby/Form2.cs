@@ -411,6 +411,11 @@ namespace shellby
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar); // textbox 4 e birşey yazılamamasını sadece sayı seçilmesini sağlar 
         }
 
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void tabPage1_Click_1(object sender, EventArgs e)
         {
 

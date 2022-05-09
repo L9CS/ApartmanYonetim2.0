@@ -74,5 +74,10 @@ namespace shellby
             this.Close();
             Application.Exit();
         }
+
+        private void bunifuLabel5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
